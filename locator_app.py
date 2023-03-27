@@ -1,3 +1,4 @@
+# Necessary modules for this project. This project uses PyQt5, folium, and io.
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtWidgets import QTabWidget, QLabel, QWidget, QPushButton, QLineEdit
 from PyQt5.QtWebEngineWidgets import QWebEngineView
@@ -6,14 +7,18 @@ import io
 
 
 class ui_window(object):
-    # Setting up main window
+# The setup_window() function sets up the dimensions
+# of the main window.
     def setup_window(self, window):
         window.setWindowTitle("Locator")
         window.setFixedWidth(530)
         window.setFixedHeight(600)
-        self.setup_tabs()
-    # Setting up area to edit, text boxes, text, and more
-    def setup_tabs(self):
+        self.setup_main_layout()
+# The setup_tabs() function is used to set up the central
+# widget, all the QLabels, which act as text or the text
+# box. This function also creates the button, which is
+# connected to the map() function.
+    def setup_main_layout(self):
         self.centralWidget = QWidget(window)
         self.centralWidget.setFixedWidth(1050)
         self.centralWidget.setFixedHeight(600)
@@ -45,7 +50,10 @@ class ui_window(object):
         self.map_container.setGeometry(QtCore.QRect(15, 100, 500, 500))
         self.map_container.setEnabled(True)
         self.map_container.setFlat(True)
-    # Setting up map, and updating map whenever the locate button is pushed
+# The map() function sets up the map, making it
+# ready to plot the latitude and longitude. This
+# function is connected to the button, which deletes,
+# and updates the map to the right coordinates.
     def map(self):
         self.map_frame = QtWidgets.QVBoxLayout(self.map_container)
         la = int(self.lattextbox.text())
@@ -63,7 +71,8 @@ class ui_window(object):
         self.map_frame.addWidget(webView)
         self.map_frame.deleteLater()
 
-# System exit
+# This is the part of the code that exits the
+# application.
 if __name__=="__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
